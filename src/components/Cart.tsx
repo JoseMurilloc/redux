@@ -1,9 +1,13 @@
 import { useSelector } from "react-redux";
+import { IState } from "../store";
+import { ICartItem } from "../store/modules/cart/types";
 
 const Cart: React.FC = () => {
 
-  const state = useSelector(state => state)
-  console.log(state)
+  const cart = useSelector<IState, ICartItem[]>(
+    state => state.cart.items
+  )
+  console.log(cart)
   
   return (
     <table>
@@ -15,7 +19,16 @@ const Cart: React.FC = () => {
           <th>Subtotal</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody>
+        {cart.map(item => (
+          <tr key={item.product.id}>
+            <td>{item.product.title}</td>
+            <td>{item.product.price}</td>
+            <td>{item.quantity}</td>
+            <td>{(item.product.price * item.quantity).toFixed(2)}</td>
+          </tr>
+        ))}
+      </tbody>
     </table>
   );
 }
