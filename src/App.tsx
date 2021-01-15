@@ -1,11 +1,14 @@
 import { Provider } from 'react-redux';
-import Catalogy from './components/Catalogy';
 import store from './store';
+
+import Cart from './components/Cart';
+import Catalogy from './components/Catalogy';
 
 function App() {
   return (
     <Provider store={store}>
       <Catalogy />
+      <Cart />
     </Provider>
   );
 }
